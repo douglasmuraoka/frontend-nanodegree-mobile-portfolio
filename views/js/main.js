@@ -448,12 +448,12 @@ function updatePositions(isInitializing) {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
   // document.body.scrollTop is no longer supported in Chrome.
   var scrollTop = isInitializing === true ? 0 : (document.documentElement.scrollTop || document.body.scrollTop) / 1250;
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin(scrollTop + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    var phase = Math.sin(scrollTop + (i % 5)) - 7;
+    items[i].style.transform = 'translateX(' + (((i % 8) * 256) + 100 * phase) +'px)';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -474,7 +474,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var $movingPizzas1 = document.querySelector("#movingPizzas1");
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 24; i++) {
     var elem = document.createElement('img');
     var basicLeft = (i % cols) * s;
     elem.className = 'mover';
