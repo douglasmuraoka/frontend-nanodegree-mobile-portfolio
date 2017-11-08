@@ -86,22 +86,6 @@ module.exports = function(grunt) {
       },
     },
 
-    /* Copies other resources to dist directory
-     * TODO: minify files
-     */
-    copy: {
-      dev: {
-        files: [
-          {
-            expand: true,
-            flatten: true,
-            src: ['src/js/*.js'],
-            dest: 'dist/js/'
-          },
-        ],
-      },
-    },
-
     /* CSS Minifier */
     cssmin: {
       target: {
@@ -113,15 +97,40 @@ module.exports = function(grunt) {
           ext: '.min.css'
         }]
       }
+    },
+
+    /* JS Minifier */
+    uglify: {
+      target: {
+        files: {
+          'dist/js/perfmatters.min.js': ['src/js/perfmatters.js']
+        }
+      }
+    },
+
+    /* HTML Minifier */
+    htmlmin: {
+      dist: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true,
+          minifyCSS: true,
+          minifyJS: true
+        },
+        files: {
+          'index.html': 'src/index.html',
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-responsive-images');
   grunt.loadNpmTasks('grunt-cwebp');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-mkdir');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
-  grunt.registerTask('default', ['clean', 'mkdir', 'copy', 'responsive_images', 'cssmin', 'cwebp']);
+  grunt.registerTask('default', ['clean', 'mkdir', 'responsive_images', 'cssmin', 'cwebp', 'uglify', 'htmlmin']);
 };
