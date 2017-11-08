@@ -37,7 +37,13 @@ form {
   will-change: left;
 }
 
+.randomPizzaImageContainer {
+  width: 35%;
+}
+
 .randomPizzaContainer {
+  width: 33.33%;
+  height: 325px;
   float: left;
   display: flex;
 }
@@ -46,6 +52,10 @@ form {
   content: "";
   display: table;
   clear:both;
+}
+
+.randomPizzaDescriptionContainer {
+  width: 65%;
 }
 
 .container {
